@@ -17,7 +17,7 @@ To run:
 - `reduced_data/` — Processed and intermediate data files
 - `code/data_analysis/` — Statistical analyses and figure plotting
 - `code/modelling/` — Analytical and simulation-based models
-- `images/` — Figure schematics and illustrations
+
 
 ---
 
