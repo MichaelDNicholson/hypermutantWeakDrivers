@@ -27,8 +27,8 @@ To run:
 
 - **Panel A:** KRAS codon 12/13 mutations in POLE vs non-POLE CRCs  
   **Scripts:**
-  - `data_analysis/annotatePublicMutData.R` — data cleaning and annotation
-  - `data_analysis/plotsStatsKrasAAs.R` — statistical analysis and plotting  
+  - `code/data_analysis/annotatePublicMutData.R` — data cleaning and annotation
+  - `code/data_analysis/plotsStatsKrasAAs.R` — statistical analysis and plotting  
   **Input data:**
   - `data/cbioportal/cbioportal_02052023_CRC_combined_study_clinical_data.tsv`
   - `data/cbioportal/cbioportal_02052023_CRC_KRAS_mutdata.tsv`
@@ -47,27 +47,27 @@ To run:
 - **Panels A–C:** Clone size trajectory plots  
   **Script:** `code/modelling/doApproxSimTrajectories.R` (Clone size trajectory plots)
 
-### Figure 4. Parameter regimes determining weak vs strong driver dominance
+### Figure 4. High mutational biases and tertiary driver rate result in the third driver occurring via weak driver clone.
 
 - **Panel A:** Probability of weak/strong clone dominance at fixed population size  
   **Script:** `code/modelling/doApproxSimsVsAnalytic.R` (Contour plots)
 
-- **Panel B:** Difference in dominance probability versus selection coefficient  
+- **Panel B:** Scaled selection coefficient
   **Script:** `code/modelling/paramRegimesAnalytic.R` (Delta function vs selection parameters)
 
 - **Panel C:** Regimes for emergence of a third driver via weak vs strong driver path  
   **Script:** `code/modelling/paramRegimesAnalytic.R` (Switch driver between subtypes)
 
-### Figure 5. Altered mutational processes and non-canonical KRAS variants in POLE-mutant CRCs
+### Figure 5. Altered mutational processes and atypical KRAS variants in POLE-mutant CRCs
 
 - **Panel A:** Codons mutated in KRAS (POLE vs non-POLE)  
-  **Script:** `data_analysis/plotsStatsKrasAAs.R`  
+  **Script:** `code/data_analysis/plotsStatsKrasAAs.R`  
   **Input data:** 
   - `reduced_data/cbioKrasDataWPoleEdm.csv`
   - `reduced_data/cbioKrasDataNoPoleEdm.csv`
 
 - **Panel B:** Mutational spectra  
-  **Script:** `data_analysis/representativeSpectraMutBurden.R`  
+  **Script:** `code/data_analysis/representativeSpectraMutBurden.R`  
   **Input data:** 
   - `data/pcawg_data/icgc_pcawg_crc_pole_sept21_simple_somatic_mutation.open.tsv.gz`
   - `data/pcawg_data/PCAWG_sigProfiler_SBS_signatures_in_samples.csv`
@@ -77,10 +77,10 @@ To run:
 
 - **Panels C–D:** Classification of KRAS variants as weak or strong drivers and mutational bias  
   **Scripts:**
-  - `data_analysis/trinucCountsGenome.R`
-  - `data_analysis/curateKrasDriverList.R`
-  - `data_analysis/annotateKrasDriverClass.R`
-  - `data_analysis/mutationalBiasAnnotation.R`  
+  - `code/data_analysis/trinucCountsGenome.R`
+  - `code/data_analysis/curateKrasDriverList.R`
+  - `code/data_analysis/annotateKrasDriverClass.R`
+  - `code/data_analysis/mutationalBiasAnnotation.R`  
   **Input data:**
   - `data/miscellaneous/V94_38_MUTANTCENSUS_KRAS.csv`
   - `data/miscellaneous/IntOGen-Distribution-KRAS-COREAD.tsv`
@@ -106,7 +106,7 @@ To run:
   - `data_analysis/fig6DtoHPlotting/posteriorDeltaPlot.R`
   - `data_analysis/fig6DtoHPlotting/propVsBiasPlot.R`
   - `data_analysis/fig6DtoHPlotting/postPredMsiDens.R`
-  - `data_analysis/enrichmentWeakStrongMSI.R`  
+    
   **Input data:**
   - `reduced_data/contigencyTables.rds`
 
@@ -132,6 +132,9 @@ To run:
 - **Supplementary Table 2:** Annotated KRAS driver classification  
   **Script:** `data_analysis/annotateKrasDriverClass.R`  
   **Data:** `reduced_data/combinedKrasListDriverAnnotated.csv`
+
+## Additional 
+  -  Analysis of KRAS drivers in MSI `data_analysis/enrichmentWeakStrongMSI.R`
 
 ---
 
