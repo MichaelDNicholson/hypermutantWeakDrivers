@@ -41,9 +41,6 @@ To run:
 - **Panel B:** Mutation burden and mutational signatures in POLE CRCs  
   **Script:** `data_analysis/poleMutCharacteristics.R`
 
-### Figure 2. Model schematic
-
-- **File:** `images/inkscape/model_schematics.svg`
 
 ### Figure 3. Mutational biases can lead to dominance of the weak driver clone
 
