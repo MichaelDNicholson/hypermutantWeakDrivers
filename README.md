@@ -1,8 +1,6 @@
-Reproducibility Guide for Figures and Tables
-
 This repository contains all code and processed data required to reproduce the figures and tables for the manuscript:
 
-Weak and strong KRAS drivers under altered mutational processes
+Hyper-mutational processes provide a head-start for weak cancer drivers: explaining atypical KRAS variants
 
 All analyses were performed in R unless otherwise stated.
 Scripts are organized by analysis type (data_analysis/, code/modelling/), with processed intermediate files stored in reduced_data/.
@@ -10,10 +8,9 @@ Scripts are organized by analysis type (data_analysis/, code/modelling/), with p
 Repository Structure
 data/               # Raw public and reference datasets
 reduced_data/       # Processed and intermediate data files
-data_analysis/      # Statistical analyses and figure plotting
+Code/data_analysis/ # Statistical analyses and figure plotting
 code/modelling/     # Analytical and simulation-based models
 images/             # Figure schematics and illustrations
-docs/               # Additional documentation
 
 Figure 1. Atypical KRAS variants and mutational processes in POLE-mutant colorectal cancer
 Panel A: KRAS codon 12/13 mutations in POLE vs non-POLE CRCs
