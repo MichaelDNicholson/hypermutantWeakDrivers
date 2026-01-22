@@ -138,9 +138,3 @@ To run:
 
 ---
 
-## Notes on Reproducibility
-
-- Public datasets are provided in `data/` where licensing permits.  
-- Processed datasets required for figure generation are stored in `reduced_data/`.  
-- Scripts are designed to be run independently unless otherwise noted in comments.  
-- Random seeds are set within simulation scripts where applicable.
