@@ -6,7 +6,7 @@ This repository contains all code and processed data required to reproduce the f
 
 To run:
 - Clone repository
-- Run code/setupDirectory.R
+- In R. run code/setupDirectory.R (necessary to place projectRoot in R environment and set up image directory)
   
 
 ---
