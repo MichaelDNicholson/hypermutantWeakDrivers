@@ -16,7 +16,7 @@ To run:
 - `data/` — Raw public and reference datasets
 - `reduced_data/` — Processed and intermediate data files
 - `code/data_analysis/` — Statistical analyses and figure plotting
-- `code/modelling/` — Analytical and simulation-based models
+- `code/modelling/` — Analytical and simulation-based analysis
 
 
 ---
