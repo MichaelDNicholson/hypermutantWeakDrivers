@@ -4,8 +4,10 @@ This repository contains all code and processed data required to reproduce the f
 
 **Hyper-mutational processes provide a head-start for weak cancer drivers: explaining atypical KRAS variants**
 
-All analyses were performed in R unless otherwise stated.  
-Scripts are organized by analysis type (`data_analysis/`, `code/modelling/`), with processed intermediate files stored in `reduced_data/`.
+To run:
+- Clone repository
+- Run code/setupDirectory.R
+  
 
 ---
 
