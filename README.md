@@ -101,11 +101,11 @@ To run:
   - `code/modelling/simsKras.R`
   - `code/modelling/generateAbcSimData.R`  
   **Plotting scripts:**
-  - `data_analysis/fig6DtoHPlotting/propVsSelPlot.R`
-  - `data_analysis/fig6DtoHPlotting/abcSelScatterPlot.R`
-  - `data_analysis/fig6DtoHPlotting/posteriorDeltaPlot.R`
-  - `data_analysis/fig6DtoHPlotting/propVsBiasPlot.R`
-  - `data_analysis/fig6DtoHPlotting/postPredMsiDens.R`
+  - `code/data_analysis/fig6DtoHPlotting/propVsSelPlot.R`
+  - `code/data_analysis/fig6DtoHPlotting/abcSelScatterPlot.R`
+  - `code/data_analysis/fig6DtoHPlotting/posteriorDeltaPlot.R`
+  - `code/data_analysis/fig6DtoHPlotting/propVsBiasPlot.R`
+  - `code/data_analysis/fig6DtoHPlotting/postPredMsiDens.R`
     
   **Input data:**
   - `reduced_data/contigencyTables.rds`
@@ -115,22 +115,22 @@ To run:
 ## Supplementary Figures and Tables
 
 - **Supplementary Figure 1:** Contingency tables of KRAS mutations  
-  **Script:** `data_analysis/enrichmentWeakStrongDrivers.R`  
+  **Script:** `code/data_analysis/enrichmentWeakStrongDrivers.R`  
   **Input data:**
   - `reduced_data/combinedKrasListDriverAnnotated.csv`
   - `reduced_data/cbioKrasDataNoPoleEdm.csv`
   - `reduced_data/cbioKrasDataWPoleEdm.csv`
 
 - **Supplementary Figure 2:** Posterior of non-hypermutant weak driver rate  
-  **Script:** `data_analysis/fig6DtoHPlotting/postDensMuWeak.R`  
+  **Script:** `code/data_analysis/fig6DtoHPlotting/postDensMuWeak.R`  
   **Input data:** `reduced_data/simData/20260108.simKrasInf50Ksims.rds`
 
 - **Supplementary Table 1:** Summary of studies used  
-  **Script:** `data_analysis/annotatePublicMutData.R`  
+  **Script:** `code/data_analysis/annotatePublicMutData.R`  
   **Data:** `reduced_data/studySummaryTable.csv`
 
 - **Supplementary Table 2:** Annotated KRAS driver classification  
-  **Script:** `data_analysis/annotateKrasDriverClass.R`  
+  **Script:** `code/data_analysis/annotateKrasDriverClass.R`  
   **Data:** `reduced_data/combinedKrasListDriverAnnotated.csv`
 
 ## Additional 
