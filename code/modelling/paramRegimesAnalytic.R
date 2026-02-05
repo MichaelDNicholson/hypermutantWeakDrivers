@@ -11,6 +11,8 @@ library(reshape2)
 
 
 plotdir = paste0(projectRoot,"images/paramRegimesAnalytic/")
+reduced_datadir <-paste(projectRoot,"reduced_data/",sep = "")
+
 saveplots = F
 fileOutCommonString <- paste0(format(Sys.time(),"%Y%m%d"),".")
 
@@ -170,57 +172,110 @@ if (saveplots == T){
 
 
 # POLE KRAS parameter regimes ---------------------------------------------
-# Fig 6
+# Fig 6 A-C
+
+possibleClassVarsExplanation <- c(
+  "Bioactivation score",
+  "Exon 2 mutations are strong drivers",
+  "observed:expected",
+  "observed:expected, MSS only"
+  
+)
 
 
 
+getExpectedDriverPolePlots <- function(biasweakNonhyp,
+                                       biasweakPole,
+                                       mutMultPole,
+                                       swd,
+                                       mu3A,
+                                       swdgrid,
+                                       ssdgrid){
+
+
+  
+ 
+    plotDelMut3APOLEvals <-  plotProb3rdEventCancer_delMut3AGridContour(biasA = biasweakNonhyp,
+                                                                 biasB = biasweakPole,
+                                                                 swd = swd ,
+                                                                 delGridDelta = .01,
+                                                                 mu3Agrid = 10^seq(-9,-3,.01),
+                                                                 mutMult = mutMultPole,
+                                                                 general =F)+
+      theme(text = element_text(family = "arial",size = 6),
+            axis.title.x = element_text(vjust=-8))
+    
+    plotDelMut3APOLEvalsnoMult <-  plotProb3rdEventCancer_delMut3AGridContour(biasA = biasweakNonhyp,
+                                                                       biasB =biasweakPole,
+                                                                       swd = swd,
+                                                                       delGridDelta = .01,
+                                                                       mu3Agrid = 10^seq(-9,-3,.02),
+                                                                       mutMult = 1,
+                                                                       general =F)+
+      theme(text = element_text(family = "arial",size = 6),
+            legend.position = "none",
+           axis.title.x = element_text(vjust=-8))
+    
+    
+    
+    pltSvalForFixedU3A <- plotSelRegimeDriverFixedMut3AContour(biasweakNonhyp,
+                                                        biasweakPole,
+                                                        mu3A,
+                                                        mutMultPole,
+                                                        swdgrid,
+                                                        ssdgrid) +
+      theme(text = element_text(family = "arial",size = 6))
+    
+    relLeg <- get_legend(plotDelMut3APOLEvals)
+    
+    plotDelMut3APOLEvals <- plotDelMut3APOLEvals+ theme(legend.position = "none")
+    allPlotSwitchDriverPole <- plot_grid(plotDelMut3APOLEvals ,
+                                     plotDelMut3APOLEvalsnoMult ,
+                                     pltSvalForFixedU3A ,
+                                     relLeg,
+                                     nrow = 1,
+                                     rel_widths = c(1,1,1,.75))
+
+
+    
+  return(allPlotSwitchDriverPole)
+}
+
+inferredBiases <- read.csv(file = paste0(reduced_datadir,"ratioMutBiasPoleNonHyp.csv"))
+
+# codon 12/13 params:
 biasweakNonhyp <- 8.8
 biasweakPole <- 35
 mutMultPole <- 100
 swd <- .3
 
-plotDelMut3APOLEvals <-  plotProb3rdEventCancer_delMut3AGridContour(biasA = biasweakNonhyp,
-                                                             biasB = biasweakPole,
-                                                             swd = swd ,
-                                                             delGridDelta = .01,
-                                                             mu3Agrid = 10^seq(-9,-3,.01),
-                                                             mutMult = mutMultPole,
-                                                             general =F)+
-  theme(text = element_text(family = "arial",size = 6),
-        axis.title.x = element_text(vjust=-5))
-
-plotDelMut3APOLEvalsnoMult <-  plotProb3rdEventCancer_delMut3AGridContour(biasA = biasweakNonhyp,
-                                                                   biasB =biasweakPole,
-                                                                   swd = swd,
-                                                                   delGridDelta = .01,
-                                                                   mu3Agrid = 10^seq(-9,-3,.02),
-                                                                   mutMult = 1,
-                                                                   general =F)+
-  theme(text = element_text(family = "arial",size = 6),
-        legend.position = "none",
-       axis.title.x = element_text(vjust=-5))
-
-
 mu3A <- 10^(-5) 
 swdgrid <- seq(0.1,3,.02)
 ssdgrid <- seq(0.1,20,.025)
-pltSvalForFixedU3A <- plotSelRegimeDriverFixedMut3AContour(biasweakNonhyp,
-                                                    biasweakPole,
-                                                    mu3A,
-                                                    mutMultPole,
-                                                    swdgrid,
-                                                    ssdgrid) +
-  theme(text = element_text(family = "arial",size = 6))
 
-relLeg <- get_legend(plotDelMut3APOLEvals)
-plotDelMut3APOLEvals <- plotDelMut3APOLEvals+ theme(legend.position = "none")
-allPlotSwitchDriverPole <- plot_grid(plotDelMut3APOLEvals ,
-                                 plotDelMut3APOLEvalsnoMult ,
-                                 pltSvalForFixedU3A ,
-                                 relLeg,
-                                 nrow = 1,
-                                 rel_widths = c(1,1,1,.75))
+allPlotSwitchDriverPoleCriteria <- lapply(1:nrow(inferredBiases), function(k){
+  
+  allPlotSwitchDriverPole <-getExpectedDriverPolePlots(inferredBiases$WeakBiasNonHyp[k],
+                                                       inferredBiases$WeakBiasPole[k],
+                                                       mutMultPole,
+                                                       swd,
+                                                       mu3A,
+                                                       swdgrid,
+                                                       ssdgrid)
+  
+  classTitle <- ggdraw() + 
+    draw_label(possibleClassVarsExplanation[k],
+               fontface='bold')
+  allPlotSwitchDriverPoleTitle <- plot_grid(classTitle,
+                                            allPlotSwitchDriverPole, nrow =2,
+                                            rel_heights = c(.2,1))
+  return(allPlotSwitchDriverPoleTitle)
+  
+})
 
+allPlotSwitchDriverPoleCodon1213 <- allPlotSwitchDriverPoleCriteria[[2]]
+
+allPlotSwitchDriverPoleAllCrit <- plot_grid(plotlist = allPlotSwitchDriverPoleCriteria,ncol=1)
 if (saveplots == T){
   
   mmToInch <- function(m){return(m/25.4)}
@@ -228,11 +283,21 @@ if (saveplots == T){
   pltfilename = paste0(plotdir,fileOutCommonString,
                        "allSwitchDriverPoleContour.pdf")
   ggplot2::ggsave(filename =   pltfilename , 
-                  plot =  allPlotSwitchDriverPole , 
+                  plot =  allPlotSwitchDriverPoleCodon1213, 
                   device = cairo_pdf, 
                   dpi = 250, 
                   width = 18,
                   height = 4.5, 
+                  units = "cm")
+  
+  pltfilename = paste0(plotdir,fileOutCommonString,
+                       "allSwitchDriverPoleAllCrit.pdf")
+  ggplot2::ggsave(filename =   pltfilename , 
+                  plot =  allPlotSwitchDriverPoleAllCrit, 
+                  device = cairo_pdf, 
+                  dpi = 250, 
+                  width = 18,
+                  height = 4.5*4, 
                   units = "cm")
   
   

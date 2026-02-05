@@ -49,12 +49,18 @@ deltaThreshNonHyp <- -1*log10(biasweakNonhyp)/log10(mu3ANonhyp)
 
 # ABC accepted selection params  -------------------------------------------
 
-
 dfParamsProps <- readRDS(paste0(reduced_simdatadir,"20260108.simKrasInf50Ksims.rds"))
+
+
 abcEps <- .05
 dfParamsPropsAbcPass <- subset(dfParamsProps,distTotal<abcEps)
 
-deltaMean <-dfParamsPropsAbcPass$delta %>% mean
+print(paste0("mean fold change increase growth rate ",
+       as.character(mean( (1+dfParamsPropsAbcPass $ssd)/(1+dfParamsPropsAbcPass$swd)))))
+     
+print(paste0("CI95 ",
+             as.character(quantile( (1+dfParamsPropsAbcPass $ssd)/(1+dfParamsPropsAbcPass$swd),
+                                    c(0.025,.975)))))
 
 
 

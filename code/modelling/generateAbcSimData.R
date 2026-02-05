@@ -8,12 +8,12 @@ library(plyr)
 library(reshape2)
 library(deSolve)
 
-
+reduced_datadir <- paste0(projectRoot,"reduced_data/")
 reduced_simdatadir <-paste(projectRoot,"reduced_data/simData/",sep = "")
 
 fileOutCommonString <- paste0(format(Sys.time(),"%Y%m%d"),".")
 
-saveOut = F
+saveOut = T
 
 
 #simulation functions
@@ -24,6 +24,7 @@ biasweakNonhyp <- 8.8
 biasweakPole <- 35
 mutMultPole <- 100
 mu3ANonhyp <- 10^(-5)
+
 
 
 
@@ -104,5 +105,6 @@ dfParamsProps$scaledParamPole <- biasweakPole/dfParamsProps$delta
 
 if (saveOut == T){
   filename <- paste0(reduced_simdatadir,fileOutCommonString,"simKrasInf50Ksims.rds")
+  
   saveRDS(dfParamsProps,file = filename)
 }

@@ -124,11 +124,14 @@ getRelProbWeakStrong <- function(df,class){
                                                     grep("class",.)]
   mutBiasPoleNonPoleByClass <- sapply(possibleClassVars, function(classVar){
     relRates<- getRelProbWeakStrong(combinedKrasList,classVar)
-    return(c(relRates[1]/relRates[2]))
+    return(c(relRates[1],relRates[2]))
   })
   #Ratio of bias weak over strong for Pole/non-Pole
-  mutBiasPoleNonPoleByClassDf <- data.frame("RatioBiasPoleNonPole" =mutBiasPoleNonPoleByClass,
-                                            "ClassCriteria" = names(mutBiasPoleNonPoleByClass))
+  mutBiasPoleNonPoleByClassDf <- data.frame( "ClassCriteria" = colnames(mutBiasPoleNonPoleByClass),
+                                             "WeakBiasPole" = mutBiasPoleNonPoleByClass[1,],
+                                            "WeakBiasNonHyp" = mutBiasPoleNonPoleByClass[2,] ,
+                                            "RatioBiasPoleNonPole" =  mutBiasPoleNonPoleByClass[1,]/
+                                              mutBiasPoleNonPoleByClass[2,])
   
   
   possibleClassVarsExplanation <- c(
